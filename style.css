@@ -1,0 +1,592 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Dancing Script", cursive;
+
+  background: radial-gradient(
+    circle at 50% 50%,
+    #7a1f4f 0%,
+    #9e3d6f 25%,
+    #c45b88 50%,
+    #e58baa 75%,
+    #f3b6ca 100%);
+
+
+  color: rgb(66, 44, 44);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ================= INTRO ================= */
+
+.intro {
+    font-family: "Brush Script MT", cursive;
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at 35% 40%,
+      #a86be8 0%,
+      #b982e8 30%,
+      #d982e8 55%,
+      transparent 75%
+    ),
+    radial-gradient(
+      circle at 90% 10%,
+      #f8c8dc 0%,
+      #f6c1d8 35%,
+      transparent 70%
+    ),
+    linear-gradient(135deg, #a56bd1 0%, #c58ce3 40%, #f4c5d9 75%, #f8d5df 100%);
+  color: #6b356f;
+
+  transition: 1.5s;
+}
+
+.intro.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.intro-content {
+  animation: appear 2s ease;
+}
+
+.intro-heart {
+  font-size: 500%;
+
+  animation: heartbeat 1.5s infinite;
+}
+
+.intro h1 {
+  font-size: clamp(2.5rem, 9vw, 5rem);
+
+  margin: 10% 0;
+}
+
+.intro p {
+  margin-bottom: 30px;
+}
+
+/* ================= BUTTONS ================= */
+
+.start-btn,
+.surprise-btn,
+.gift-btn {
+  border: none;
+
+  padding: 15px 30px;
+
+  border-radius: 50px;
+
+  background: white;
+
+  color: #954fb9;
+
+  font-size: 140%;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+  transition: 0.3s;
+}
+
+.start-btn:hover,
+.surprise-btn:hover,
+.gift-btn:hover {
+  transform: scale(1.08);
+}
+
+/* ================= MAIN ================= */
+
+.container {
+  width: 90%;
+
+  max-width: 900px;
+
+  margin: auto;
+
+  padding: 70px 0;
+
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.title {
+  font-size: clamp(2rem, 7vw, 4rem);
+
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  opacity: 0.9;
+}
+
+/* ================= NAMES ================= */
+
+.names {
+  margin: 35px 0;
+}
+
+.names h2 {
+  font-size: clamp(2rem, 7vw, 3.5rem);
+}
+
+.names span {
+  color: #ffe1f4;
+}
+
+.anniversary {
+  margin-top: 15px;
+
+  font-size: 1.1rem;
+}
+
+/* ================= PHOTOS ================= */
+
+.photo-section {
+  margin: 50px 0;
+}
+
+.photo-section h2 {
+  margin-bottom: 25px;
+}
+
+.photos {
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 20px;
+}
+
+.photos img {
+  width: 250px;
+
+  height: 300px;
+
+  object-fit: cover;
+
+  border-radius: 25px;
+
+  border: 5px solid rgba(255, 255, 255, 0.7);
+
+  box-shadow: 0 15px 40px rgba(70, 20, 100, 0.3);
+
+  transition: 0.4s;
+}
+
+.photos img:hover {
+  transform: rotate(-2deg) scale(1.04);
+}
+
+/* ================= ENVELOPE ================= */
+
+.envelope-container {
+  display: flex;
+
+  justify-content: center;
+
+  margin: 50px 0 20px;
+}
+
+.envelope {
+  width: 280px;
+
+  height: 190px;
+
+  position: relative;
+
+  cursor: pointer;
+
+  transition: 0.5s;
+}
+
+.envelope:hover {
+  transform: translateY(-10px);
+}
+
+.envelope-body {
+  position: absolute;
+
+  inset: 0;
+
+  background: #d85c8c;
+
+  border-radius: 10px;
+
+  box-shadow: 0 20px 50px rgba(70, 20, 100, 0.3);
+}
+
+.flap {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 0;
+  height: 0;
+
+  border-left: 140px solid transparent;
+
+  border-right: 140px solid transparent;
+
+  border-top: 110px solid #b06a8b;
+
+  transform-origin: top;
+
+  transition: 0.8s;
+
+  z-index: 5;
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.seal {
+  position: absolute;
+
+  z-index: 10;
+
+  left: 50%;
+
+  top: 75px;
+
+  transform: translateX(-50%);
+
+  font-size: 40px;
+
+  transition: 0.4s;
+}
+
+.envelope.open .seal {
+  opacity: 0;
+}
+
+/* ================= LETTER ================= */
+
+.letter {
+  background: rgba(255, 255, 255, 0.95);
+
+  color: #663b70;
+
+  padding: 35px;
+
+  border-radius: 25px;
+
+  text-align: left;
+
+  box-shadow: 0 20px 50px rgba(70, 20, 100, 0.25);
+
+  opacity: 0;
+
+  transform: translateY(30px);
+
+  transition: 1s;
+}
+
+.letter.show {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+.letter h2 {
+  text-align: center;
+
+  color: #d04e9e;
+
+  margin-bottom: 25px;
+}
+
+.letter p {
+  line-height: 1.8;
+
+  margin-bottom: 18px;
+}
+
+.signature {
+  text-align: right;
+
+  font-weight: bold;
+
+  color: #b34db4;
+}
+
+/* ================= REASONS ================= */
+
+.reasons {
+  margin-top: 70px;
+}
+
+.reasons h2 {
+  font-size: 2.2rem;
+
+  margin-bottom: 25px;
+}
+
+.reason-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 20px;
+}
+
+.reason {
+  padding: 25px;
+
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.18);
+
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 10px 30px rgba(70, 20, 100, 0.15);
+
+  transition: 0.3s;
+}
+
+.reason:hover {
+  transform: translateY(-7px);
+}
+
+.reason span {
+  font-size: 35px;
+}
+
+.reason h3 {
+  margin: 10px 0;
+}
+
+.reason p {
+  line-height: 1.6;
+}
+
+/* ================= GIFT ================= */
+
+.gift-section {
+  margin-top: 70px;
+}
+
+.gift-box {
+  margin: 30px auto;
+
+  width: 180px;
+
+  height: 150px;
+
+  position: relative;
+
+  cursor: pointer;
+
+  transition: 0.5s;
+}
+
+.gift-box:hover {
+  transform: scale(1.08);
+}
+
+.gift-body {
+  position: absolute;
+
+  bottom: 0;
+
+  width: 180px;
+
+  height: 120px;
+
+  background: #ff4f9a;
+
+  border-radius: 8px;
+}
+
+.gift-lid {
+  position: absolute;
+
+  top: 0;
+  left: -10px;
+
+  width: 200px;
+
+  height: 40px;
+
+  background: #ff75b3;
+
+  border-radius: 8px;
+
+  z-index: 2;
+}
+
+.ribbon-vertical {
+  position: absolute;
+
+  left: 75px;
+
+  bottom: 0;
+
+  width: 30px;
+
+  height: 120px;
+
+  background: #ffe0f1;
+
+  z-index: 3;
+}
+
+.gift-message {
+  display: none;
+
+  margin-top: 30px;
+
+  padding: 35px;
+
+  border-radius: 25px;
+
+  background: rgba(255, 255, 255, 0.2);
+
+  backdrop-filter: blur(10px);
+
+  animation: pop 0.8s ease;
+}
+
+.gift-message h2 {
+  font-size: 2.5rem;
+
+  margin-bottom: 15px;
+}
+
+.gift-message p {
+  line-height: 1.8;
+
+  font-size: 1.1rem;
+
+  margin-bottom: 15px;
+}
+
+.final-hearts {
+  font-size: 55px;
+
+  margin: 20px 0;
+}
+
+/* ================= FLOATING HEARTS ================= */
+
+.heart {
+  position: fixed;
+
+  bottom: -40px;
+
+  pointer-events: none;
+
+  animation: floatUp linear forwards;
+
+  z-index: 50;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes appear {
+  from {
+    opacity: 0;
+
+    transform: translateY(40px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+
+    transform: scale(0.5);
+  }
+
+  70% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0) rotate(0);
+
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+
+    opacity: 0;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+  .reason-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .photos img {
+    width: 90%;
+
+    max-width: 280px;
+  }
+
+  .letter {
+    padding: 25px;
+  }
+
+  .envelope {
+    transform: scale(0.9);
+  }
+}
